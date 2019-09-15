@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ImageEditor;
+using System;
 using System.Drawing;
+using System.IO;
+
 
 namespace ConsoleApp1
 {
@@ -8,16 +11,28 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             string fileName = string.Empty;
-            args[0] = fileName;
+
             try
             {
-                Bitmap image1 = new Bitmap(fileName);
-                Console.WriteLine(image1.Height);
+                fileName = args[1];
             }
-            catch (ArgumentException)
+            catch (IndexOutOfRangeException)
             {
-                Console.WriteLine("Error");
+                Console.WriteLine("Enter a file path for an image: ");
+                fileName = Console.ReadLine();
             }
+
+            EditImage image = new EditImage(fileName);
+            image.CreateNegativeImage();
+            image.CreateGrayscaleImage();
+            image.SaveImages(fileName);
+
+            
+           
+
+        
+
+
         }
     }
 }
