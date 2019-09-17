@@ -22,43 +22,45 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
             openFileDialog.InitialDirectory = "C:\\";
             openFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
-            
 
-            if(openFileDialog.ShowDialog() == DialogResult.OK)
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Bitmap tempImg = new Bitmap(openFileDialog.FileName);
-                pictureBox1.Image = tempImg;
-                new EditImage(openFileDialog.FileName);
+                EditImage image = new EditImage(openFileDialog.FileName);
+                pictureBox1.Image = image.Image;
             }
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            EditImage image = new EditImage(openFileDialog.FileName);
+            image = new EditImage(openFileDialog.FileName); ;
             pictureBox2.Image = image.CreateNegativeImage();
-            pictureBox2.Tag = "negative";
+            pictureBox2.Tag = image.NegativeImage.Tag.ToString();
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            EditImage image = new EditImage(openFileDialog.FileName);
+            image = new EditImage(openFileDialog.FileName);
             pictureBox2.Image = image.CreateGrayscaleImage();
-            pictureBox2.Tag = "greyscale";
+            pictureBox2.Tag = image.GreyscaleImage.Tag;
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
+
             try
             {
                 if (pictureBox2.Tag == image.NegativeImage.Tag)
                 {
-                    SaveFileDialog.InitialDirectory = image.NewFilePath(image.NegativeImage);
+                    SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.NegativeImage);
+                    SaveFileDialog.FileName = image.GetFileNameWithSufix(image.NegativeImage);
                 }
             }
             catch (NullReferenceException) { }
@@ -67,15 +69,39 @@ namespace WindowsFormsApp1
             {
                 if (pictureBox2.Tag == image.GreyscaleImage.Tag)
                 {
-                    SaveFileDialog.InitialDirectory = image.NewFilePath(image.GreyscaleImage);
-                    SaveFileDialog.FileName
+                    SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.GreyscaleImage);
+                    SaveFileDialog.FileName = image.GetFileNameWithSufix(image.GreyscaleImage);
                 }
             }
             catch (NullReferenceException) { }
 
-            
+            try
+            {
+                if (pictureBox2.Tag == image.BlurredImage.Tag)
+                {
+                    SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.BlurredImage);
+                    SaveFileDialog.FileName = image.GetFileNameWithSufix(image.BlurredImage);
+                }
+            }
+            catch (NullReferenceException) { }
+
             SaveFileDialog.ShowDialog();
-            
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            image = new EditImage(openFileDialog.FileName);
+            pictureBox2.Image = image.CreateBlurredImage();
+            pictureBox2.Tag = image.BlurredImage.Tag;
         }
     }
 }
+
+
+

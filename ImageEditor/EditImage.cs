@@ -11,19 +11,23 @@ namespace ImageEditor
         public Bitmap Image { get; private set; }
         private Bitmap negativeImage;
         private Bitmap greyscaleImage;
+        private Bitmap blurredImage;
 
         public Bitmap NegativeImage { get { return negativeImage; } }
         public Bitmap GreyscaleImage { get { return greyscaleImage; } }
+        public Bitmap BlurredImage { get { return blurredImage; } }
+
         private string fileName;
-        public FilePathSplitter FilePath {get; set;}
 
         public EditImage(string fileName)
         {
             this.fileName = fileName;
             try
             {
-                Image = new Bitmap(fileName);
-                
+                Bitmap tempImage = new Bitmap(fileName);
+                Image = new Bitmap(tempImage, 300, 300);
+
+                tempImage.Dispose();
 
             }
             catch (ArgumentException)
@@ -31,7 +35,6 @@ namespace ImageEditor
                 Console.WriteLine("Invalid Format");
                 Environment.Exit(0);
             }
-            FilePath = new FilePathSplitter(fileName);
         }
 
         public Bitmap CreateNegativeImage()
@@ -72,28 +75,80 @@ namespace ImageEditor
 
         }
 
+        public Bitmap CreateBlurredImage()
+        {
+            blurredImage = (Bitmap)Image.Clone();
+            Bitmap tempImage = new Bitmap(3, 3);
+            blurredImage.Tag = new string("blurred".ToCharArray());
+
+            for (int x = 0; x < Image.Height; x++)
+            {
+                for (int y = 0; y < Image.Width; y++)
+                {
+                    Color pixelColor;
+                    int redSum = 0;
+                    int greenSum = 0;
+                    int blueSum = 0;
+
+                    if (x > 0 && x < Image.Height - 1 && y > 0 && y < Image.Width - 1)
+                    {
+                        pixelColor = blurredImage.GetPixel(x - 1, y - 1);
+                        tempImage.SetPixel(0, 0, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x - 1, y);
+                        tempImage.SetPixel(0, 1, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x - 1, y + 1);
+                        tempImage.SetPixel(0, 2, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x, y - 1);
+                        tempImage.SetPixel(1, 0, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x, y);
+                        tempImage.SetPixel(1, 1, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x, y + 1);
+                        tempImage.SetPixel(1, 2, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x + 1, y - 1);
+                        tempImage.SetPixel(2, 0, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x + 1, y);
+                        tempImage.SetPixel(2, 1, pixelColor);
+                        pixelColor = blurredImage.GetPixel(x + 1, y + 1);
+                        tempImage.SetPixel(2, 2, pixelColor);
+
+                        for (int a = 0; a < tempImage.Height; a++)
+                        {
+                            for (int b = 0; b < tempImage.Width; b++)
+                            {
+                                pixelColor = tempImage.GetPixel(a, b);
+                                redSum += pixelColor.R;
+                                greenSum += pixelColor.G;
+                                blueSum += pixelColor.B;
+                            }
+                        }
+
+                        blurredImage.SetPixel(x, y, Color.FromArgb(redSum / 9, greenSum / 9, blueSum / 9));
+                    }
+
+                }
+            }
+
+            
+            return blurredImage;
+
+        }
+
+        public string GetFileNameWithSufix(Bitmap img)
+        {
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            string fileExtension = Path.GetExtension(fileName);
+
+            return $"{fileNameWithoutExtension}_{img.Tag.ToString()}{fileExtension}";
+        }
+
+        public string GetFullFilePathWithSufix(Bitmap img)
+        {
+            return $"{Path.GetDirectoryName(fileName)}\\{GetFileNameWithSufix(img)}";
+        }
+
         public void SaveImage(Bitmap img)
         {
-            try
-            {
-                if (img.Tag == negativeImage.Tag)
-                {
-                    FilePath.AddSufixToFileName("negative");
-                    negativeImage.Save(FilePath.FullFilePathWithSufix);
-                }
-            }
-            catch (NullReferenceException) { }
-
-            try
-            {
-                if (img.Tag == greyscaleImage.Tag)
-                {
-                    FilePath.AddSufixToFileName("greyscale");
-                    greyscaleImage.Save(FilePath.FullFilePathWithSufix);
-                }
-
-            }
-            catch (NullReferenceException) { }
+            img.Save(GetFullFilePathWithSufix(img));
         }
     }
 }
