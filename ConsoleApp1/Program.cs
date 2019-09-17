@@ -23,9 +23,10 @@ namespace ConsoleApp1
             }
 
             EditImage image = new EditImage(fileName);
-            image.CreateNegativeImage();
+            //image.CreateNegativeImage();
+            //image.SaveImage(image.NegativeImage);
             image.CreateGrayscaleImage();
-            image.SaveImages(fileName);
+            image.SaveImage(image.GreyscaleImage);
 
             
            

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageEditor", "ImageEditor\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{523A8DCC-A891-40E0-9DE8-A0C5A244A2EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{021BE124-CD29-4A3F-B85D-7F2257B2C0EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{523A8DCC-A891-40E0-9DE8-A0C5A244A2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{523A8DCC-A891-40E0-9DE8-A0C5A244A2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{523A8DCC-A891-40E0-9DE8-A0C5A244A2EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021BE124-CD29-4A3F-B85D-7F2257B2C0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021BE124-CD29-4A3F-B85D-7F2257B2C0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021BE124-CD29-4A3F-B85D-7F2257B2C0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021BE124-CD29-4A3F-B85D-7F2257B2C0EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
