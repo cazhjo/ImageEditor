@@ -24,9 +24,13 @@ namespace ImageEditor
             this.fileName = fileName;
             try
             {
-                Bitmap tempImage = new Bitmap(fileName);
-                Image = new Bitmap(tempImage, 300, 300);
-
+                Image = new Bitmap(fileName);
+                Bitmap tempImage = (Bitmap)Image.Clone();
+                if (Image.Height > 150 && Image.Width > 150)
+                {
+                    
+                    Image = new Bitmap(tempImage, 300, 300);
+                }
                 tempImage.Dispose();
 
             }
@@ -78,7 +82,6 @@ namespace ImageEditor
         public Bitmap CreateBlurredImage()
         {
             blurredImage = (Bitmap)Image.Clone();
-            Bitmap tempImage = new Bitmap(3, 3);
             blurredImage.Tag = new string("blurred".ToCharArray());
 
             for (int x = 0; x < Image.Height; x++)
@@ -92,43 +95,23 @@ namespace ImageEditor
 
                     if (x > 0 && x < Image.Height - 1 && y > 0 && y < Image.Width - 1)
                     {
-                        pixelColor = blurredImage.GetPixel(x - 1, y - 1);
-                        tempImage.SetPixel(0, 0, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x - 1, y);
-                        tempImage.SetPixel(0, 1, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x - 1, y + 1);
-                        tempImage.SetPixel(0, 2, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x, y - 1);
-                        tempImage.SetPixel(1, 0, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x, y);
-                        tempImage.SetPixel(1, 1, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x, y + 1);
-                        tempImage.SetPixel(1, 2, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x + 1, y - 1);
-                        tempImage.SetPixel(2, 0, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x + 1, y);
-                        tempImage.SetPixel(2, 1, pixelColor);
-                        pixelColor = blurredImage.GetPixel(x + 1, y + 1);
-                        tempImage.SetPixel(2, 2, pixelColor);
-
-                        for (int a = 0; a < tempImage.Height; a++)
+                        for(int d = -1; d < 2; d++)
                         {
-                            for (int b = 0; b < tempImage.Width; b++)
+                            for (int e = -1; e < 2; e++)
                             {
-                                pixelColor = tempImage.GetPixel(a, b);
+                                pixelColor = blurredImage.GetPixel(x+d, y+e);
                                 redSum += pixelColor.R;
                                 greenSum += pixelColor.G;
                                 blueSum += pixelColor.B;
                             }
                         }
-
+                        
                         blurredImage.SetPixel(x, y, Color.FromArgb(redSum / 9, greenSum / 9, blueSum / 9));
                     }
 
                 }
             }
 
-            
             return blurredImage;
 
         }
