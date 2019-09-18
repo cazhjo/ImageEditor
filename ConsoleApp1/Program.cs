@@ -26,10 +26,10 @@ namespace ConsoleApp1
             image.CreateBlurredImage();
             image.SaveImage(image.BlurredImage);
 
-            
-           
 
-        
+
+
+
 
 
         }
