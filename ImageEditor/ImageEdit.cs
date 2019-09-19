@@ -6,7 +6,7 @@ using System.IO;
 
 namespace ImageEditor
 {
-    public class EditImage
+    public class ImageEdit
     {
         public Bitmap Image { get; private set; }
         private Bitmap negativeImage;
@@ -17,11 +17,12 @@ namespace ImageEditor
         public Bitmap GreyscaleImage { get { return greyscaleImage; } }
         public Bitmap BlurredImage { get { return blurredImage; } }
 
-        private string fileName;
+        private FilePathSplitter filePath;
 
-        public EditImage(string fileName)
+        public ImageEdit(string fileName)
         {
-            this.fileName = fileName;
+            filePath = new FilePathSplitter(fileName);
+
             try
             {
                 Image = new Bitmap(fileName);
@@ -93,11 +94,11 @@ namespace ImageEditor
                     int greenSum = 0;
                     int blueSum = 0;
 
-                    if (x > 0 && x < Image.Height - 1 && y > 0 && y < Image.Width - 1)
+                    if (x > 1 && x < Image.Height - 2 && y > 1 && y < Image.Width - 2)
                     {
-                        for(int d = -1; d < 2; d++)
+                        for(int d = -2; d < 3; d++)
                         {
-                            for (int e = -1; e < 2; e++)
+                            for (int e = -2; e < 3; e++)
                             {
                                 pixelColor = blurredImage.GetPixel(x+d, y+e);
                                 redSum += pixelColor.R;
@@ -106,7 +107,7 @@ namespace ImageEditor
                             }
                         }
                         
-                        blurredImage.SetPixel(x, y, Color.FromArgb(redSum / 9, greenSum / 9, blueSum / 9));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(redSum / 25, greenSum / 25, blueSum / 25));
                     }
 
                 }
@@ -116,22 +117,9 @@ namespace ImageEditor
 
         }
 
-        public string GetFileNameWithSufix(Bitmap img)
-        {
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-            string fileExtension = Path.GetExtension(fileName);
-
-            return $"{fileNameWithoutExtension}_{img.Tag.ToString()}{fileExtension}";
-        }
-
-        public string GetFullFilePathWithSufix(Bitmap img)
-        {
-            return $"{Path.GetDirectoryName(fileName)}\\{GetFileNameWithSufix(img)}";
-        }
-
         public void SaveImage(Bitmap img)
         {
-            img.Save(GetFullFilePathWithSufix(img));
+            img.Save(filePath.GetFileNameWithSufix(img.Tag.ToString()));
         }
     }
 }

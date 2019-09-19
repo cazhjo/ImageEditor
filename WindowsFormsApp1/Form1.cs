@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
     {
         private OpenFileDialog openFileDialog = new OpenFileDialog();
         private SaveFileDialog SaveFileDialog = new SaveFileDialog();
-        private EditImage image;
+        private ImageEdit image;
 
         public Form1()
         {
@@ -33,28 +33,28 @@ namespace WindowsFormsApp1
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                EditImage image = new EditImage(openFileDialog.FileName);
+                ImageEdit image = new ImageEdit(openFileDialog.FileName);
                 pictureBox1.Image = image.Image;
             }
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            image = new EditImage(openFileDialog.FileName); ;
+            image = new ImageEdit(openFileDialog.FileName); ;
             pictureBox2.Image = image.CreateNegativeImage();
             pictureBox2.Tag = image.NegativeImage.Tag.ToString();
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            image = new EditImage(openFileDialog.FileName);
+            image = new ImageEdit(openFileDialog.FileName);
             pictureBox2.Image = image.CreateGrayscaleImage();
             pictureBox2.Tag = image.GreyscaleImage.Tag;
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
             try
             {
                 if (pictureBox2.Tag == image.NegativeImage.Tag)
@@ -71,6 +71,10 @@ namespace WindowsFormsApp1
                 {
                     SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.GreyscaleImage);
                     SaveFileDialog.FileName = image.GetFileNameWithSufix(image.GreyscaleImage);
+                    if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        image.SaveImage(image.GreyscaleImage);
+                    }
                 }
             }
             catch (NullReferenceException) { }
@@ -81,11 +85,15 @@ namespace WindowsFormsApp1
                 {
                     SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.BlurredImage);
                     SaveFileDialog.FileName = image.GetFileNameWithSufix(image.BlurredImage);
+                    if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        
+                    }
                 }
             }
             catch (NullReferenceException) { }
 
-            SaveFileDialog.ShowDialog();
+            
 
         }
 
@@ -96,7 +104,7 @@ namespace WindowsFormsApp1
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            image = new EditImage(openFileDialog.FileName);
+            image = new ImageEdit(openFileDialog.FileName);
             pictureBox2.Image = image.CreateBlurredImage();
             pictureBox2.Tag = image.BlurredImage.Tag;
         }
