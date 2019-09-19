@@ -22,7 +22,7 @@ namespace ConsoleApp1
                 fileName = Console.ReadLine();
             }
 
-            EditImage image = new EditImage(fileName);
+            ImageEdit image = new ImageEdit(fileName);
             image.CreateBlurredImage();
             image.SaveImage(image.BlurredImage);
 
