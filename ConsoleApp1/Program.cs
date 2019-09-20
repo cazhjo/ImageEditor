@@ -21,16 +21,20 @@ namespace ConsoleApp1
                 Console.WriteLine("Enter a file path for an image: ");
                 fileName = Console.ReadLine();
             }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Enter a file path for an image: ");
+                fileName = Console.ReadLine();
+            }
 
             ImageEdit image = new ImageEdit(fileName);
-            image.CreateBlurredImage();
-            image.SaveImage(image.BlurredImage);
+            Bitmap blurredImage = image.CreateBlurredImage();
+            Bitmap greyscaleImage = image.CreateGrayscaleImage();
+            Bitmap negativeImage = image.CreateNegativeImage();
 
-
-
-
-
-
+            image.SaveImage(blurredImage);
+            image.SaveImage(greyscaleImage);
+            image.SaveImage(negativeImage);
 
         }
     }

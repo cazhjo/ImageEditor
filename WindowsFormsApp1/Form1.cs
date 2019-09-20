@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
         private OpenFileDialog openFileDialog = new OpenFileDialog();
         private SaveFileDialog SaveFileDialog = new SaveFileDialog();
         private ImageEdit image;
+        private FilePathSplitter filePath;
 
         public Form1()
         {
@@ -25,7 +26,7 @@ namespace WindowsFormsApp1
 
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void BrowseButton_Click(object sender, EventArgs e)
         {
             openFileDialog.InitialDirectory = "C:\\";
             openFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
@@ -34,80 +35,67 @@ namespace WindowsFormsApp1
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 ImageEdit image = new ImageEdit(openFileDialog.FileName);
-                pictureBox1.Image = image.Image;
+                originalImageBox.Image = image.Image;
+                
+
+                negativeButton.Enabled = true;
+                greyscaleButton.Enabled = true;
+                blurButton.Enabled = true;
             }
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        private void NegativeButton_Click(object sender, EventArgs e)
         {
             image = new ImageEdit(openFileDialog.FileName); ;
-            pictureBox2.Image = image.CreateNegativeImage();
-            pictureBox2.Tag = image.NegativeImage.Tag.ToString();
+            editedImageBox.Image = image.CreateNegativeImage();
+
+            saveButton.Enabled = true;
         }
 
-        private void Button4_Click(object sender, EventArgs e)
+        private void GreyscaleButton_Click(object sender, EventArgs e)
         {
             image = new ImageEdit(openFileDialog.FileName);
-            pictureBox2.Image = image.CreateGrayscaleImage();
-            pictureBox2.Tag = image.GreyscaleImage.Tag;
+            editedImageBox.Image = image.CreateGrayscaleImage();
+
+            saveButton.Enabled = true;
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void BlurButton_Click(object sender, EventArgs e)
         {
+            image = new ImageEdit(openFileDialog.FileName);
+            editedImageBox.Image = image.CreateBlurredImage();
+
+            saveButton.Enabled = true;
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            filePath = new FilePathSplitter(openFileDialog.FileName);
+
             SaveFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
-            try
-            {
-                if (pictureBox2.Tag == image.NegativeImage.Tag)
-                {
-                    SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.NegativeImage);
-                    SaveFileDialog.FileName = image.GetFileNameWithSufix(image.NegativeImage);
-                }
-            }
-            catch (NullReferenceException) { }
+            SaveFileDialog.InitialDirectory = filePath.GetFileDirectory();
+            SaveFileDialog.FileName = filePath.GetFileNameWithSufix(editedImageBox.Image.Tag.ToString());
 
-            try
+            if (SaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (pictureBox2.Tag == image.GreyscaleImage.Tag)
-                {
-                    SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.GreyscaleImage);
-                    SaveFileDialog.FileName = image.GetFileNameWithSufix(image.GreyscaleImage);
-                    if (SaveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        image.SaveImage(image.GreyscaleImage);
-                    }
-                }
+                image.SaveImage((Bitmap)editedImageBox.Image, SaveFileDialog.FileName);
             }
-            catch (NullReferenceException) { }
-
-            try
-            {
-                if (pictureBox2.Tag == image.BlurredImage.Tag)
-                {
-                    SaveFileDialog.InitialDirectory = image.GetFullFilePathWithSufix(image.BlurredImage);
-                    SaveFileDialog.FileName = image.GetFileNameWithSufix(image.BlurredImage);
-                    if (SaveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        
-                    }
-                }
-            }
-            catch (NullReferenceException) { }
-
             
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //when editedImageBox is null
+            saveButton.Enabled = false;
 
+            //when originalImageBox is null
+            negativeButton.Enabled = false;
+            greyscaleButton.Enabled = false;
+            blurButton.Enabled = false;
         }
 
-        private void Button5_Click(object sender, EventArgs e)
-        {
-            image = new ImageEdit(openFileDialog.FileName);
-            pictureBox2.Image = image.CreateBlurredImage();
-            pictureBox2.Tag = image.BlurredImage.Tag;
-        }
+       
     }
 }
 
