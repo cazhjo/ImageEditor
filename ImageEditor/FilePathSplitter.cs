@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ImageEditor
 {
-    class FilePathSplitter
+    public class FilePathSplitter
     {
         string fileName;
 
