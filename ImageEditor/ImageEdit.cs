@@ -11,6 +11,11 @@ namespace ImageEditor
         public Bitmap Image { get; private set; }
         private FilePathSplitter filePath;
 
+        public ImageEdit(Bitmap originalImage)
+        {
+            Image = originalImage;
+        }
+
         public ImageEdit(string fileName)
         {
             filePath = new FilePathSplitter(fileName);
