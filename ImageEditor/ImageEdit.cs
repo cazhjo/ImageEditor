@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace ImageEditor
 {
@@ -23,19 +24,10 @@ namespace ImageEditor
             try
             {
                 Image = new Bitmap(fileName);
-                Bitmap tempImage = (Bitmap)Image.Clone();
-                if (Image.Height > 150 && Image.Width > 150)
-                {
-
-                    Image = new Bitmap(tempImage, 150, 150);
-                }
-                tempImage.Dispose();
-                
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("Invalid Format");
-                Environment.Exit(0);
+                
             }
         }
 
@@ -53,8 +45,8 @@ namespace ImageEditor
                 }
 
             }
-            return negativeImage;
 
+            return negativeImage;
         }
 
         public Bitmap CreateGrayscaleImage()
@@ -72,8 +64,8 @@ namespace ImageEditor
                     greyscaleImage.SetPixel(x, y, Color.FromArgb(rgbAverage, rgbAverage, rgbAverage));
                 }
             }
-            return greyscaleImage;
 
+            return greyscaleImage;
         }
 
         public Bitmap CreateBlurredImage()
@@ -110,12 +102,11 @@ namespace ImageEditor
             }
 
             return blurredImage;
-
         }
 
         public void SaveImage(Bitmap img)
         {
-            img.Save(filePath.GetFileDirectory() + "\\" + filePath.GetFileNameWithSufix(img.Tag.ToString()));
+            img.Save(filePath.GetFileDirectory() + Path.DirectorySeparatorChar + filePath.GetFileNameWithSufix(img.Tag.ToString()));
         }
 
         public void SaveImage(Bitmap img, string fileName)
@@ -123,6 +114,8 @@ namespace ImageEditor
             img.Save(fileName);
         }
     }
+
+    
 }
 
 

@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.InitialDirectory = "C:" + Path.DirectorySeparatorChar;
             openFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
 
 
@@ -37,7 +37,6 @@ namespace WindowsFormsApp1
                 ImageEdit image = new ImageEdit(openFileDialog.FileName);
                 originalImageBox.Image = image.Image;
                 
-
                 negativeButton.Enabled = true;
                 greyscaleButton.Enabled = true;
                 blurButton.Enabled = true;
