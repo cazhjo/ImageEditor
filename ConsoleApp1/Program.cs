@@ -12,16 +12,11 @@ namespace ConsoleApp1
         {
             string fileName = string.Empty;
 
-            try
+            if(args.Length != 0)
             {
                 fileName = args[1];
             }
-            catch (IndexOutOfRangeException)
-            {
-                Console.WriteLine("Enter a file path for an image: ");
-                fileName = Console.ReadLine();
-            }
-            catch (NullReferenceException)
+            else
             {
                 Console.WriteLine("Enter a file path for an image: ");
                 fileName = Console.ReadLine();
