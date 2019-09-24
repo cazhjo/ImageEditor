@@ -46,7 +46,7 @@ namespace Tests
         public void TestThatImage_IsGreyscale()
         {
             Bitmap originalImage = new Bitmap(3, 3);
-            ImageEdit image = new ImageEdit(originalImage);
+            ImageEdit imageEdit = new ImageEdit(originalImage);
 
             for (int x = 0; x < originalImage.Height; x++)
             {
@@ -56,7 +56,7 @@ namespace Tests
                 }
             }
 
-            Bitmap greyscaleImage = image.CreateGrayscaleImage();
+            Bitmap greyscaleImage = imageEdit.CreateGrayscaleImage();
 
             for (int x = 0; x < greyscaleImage.Height; x++)
             {
@@ -78,7 +78,60 @@ namespace Tests
         public void TestThatImage_IsBlurred()
         {
             Bitmap originalImage = new Bitmap(9, 9);
+            ImageEdit imageEdit = new ImageEdit(originalImage);
 
+            for(int x = 0; x < originalImage.Height; x++)
+            {
+                for(int y = 0; y < originalImage.Width; y++)
+                {
+                    originalImage.SetPixel(x, y, Color.AntiqueWhite);
+                }
+            }
+
+            originalImage.SetPixel(4, 4, Color.AliceBlue);
+
+            Bitmap blurredImage = imageEdit.CreateBlurredImage();
+
+            for (int x = 0; x < blurredImage.Height; x++)
+            {
+                for (int y = 0; y < blurredImage.Width; y++)
+                {
+                    Color pixelColor;
+                    int redSum = 0;
+                    int greenSum = 0;
+                    int blueSum = 0;
+
+                    if (x > 1 && x < originalImage.Height - 2 && y > 1 && y < originalImage.Width - 2)
+                    {
+                        for (int d = -2; d < 3; d++)
+                        {
+                            for (int e = -2; e < 3; e++)
+                            {
+                                pixelColor = originalImage.GetPixel(x + d, y + e);
+                                redSum += pixelColor.R;
+                                greenSum += pixelColor.G;
+                                blueSum += pixelColor.B;
+                            }
+                        }
+
+                        Color expectedColor = Color.FromArgb(redSum / 25, greenSum / 25, blueSum / 25);
+                        Assert.AreEqual(expectedColor, blurredImage.GetPixel(x, y));
+                    }
+
+                }
+            }
+
+
+        }
+
+        [Test]
+        public void TestThatFilePath_HasSufix()
+        {
+            string originalFilePath = @"C:\Picture\apple.jpg";
+            FilePathSplitter filePath = new FilePathSplitter(originalFilePath);
+            string newFilePath = filePath.GetFileDirectory() + filePath.DirectorySeparatorChar + filePath.GetFileNameWithSufix("test");
+
+            Assert.AreEqual(@"C:\Picture\apple_test.jpg", newFilePath);
         }
     }
 }

@@ -9,6 +9,8 @@ namespace ImageEditor
     {
         string fileName;
 
+        public char DirectorySeparatorChar { get; } = Path.DirectorySeparatorChar;
+
         public FilePathSplitter(string fileName)
         {
             this.fileName = fileName;
@@ -33,5 +35,6 @@ namespace ImageEditor
         {
             return GetFileNameWithoutExtension() + $"_{sufix}" + GetFileExtension();
         }
+
     }
 }
