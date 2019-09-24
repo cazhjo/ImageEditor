@@ -22,7 +22,17 @@ namespace ConsoleApp1
                 fileName = Console.ReadLine();
             }
 
-            ImageEdit image = new ImageEdit(fileName);
+            ImageEdit image = null;
+            try
+            {
+                image = new ImageEdit(fileName);
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Invalid Format");
+                Environment.Exit(1);
+            }
+
             Bitmap blurredImage = image.CreateBlurredImage();
             Bitmap greyscaleImage = image.CreateGrayscaleImage();
             Bitmap negativeImage = image.CreateNegativeImage();

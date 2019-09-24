@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Runtime.Serialization;
 
 namespace ImageEditor
 {
@@ -20,15 +17,7 @@ namespace ImageEditor
         public ImageEdit(string fileName)
         {
             filePath = new FilePathSplitter(fileName);
-
-            try
-            {
-                Image = new Bitmap(fileName);
-            }
-            catch (ArgumentException)
-            {
-                
-            }
+            Image = new Bitmap(fileName);
         }
 
         public Bitmap CreateNegativeImage()
@@ -115,7 +104,7 @@ namespace ImageEditor
         }
     }
 
-    
+
 }
 
 
