@@ -44,9 +44,10 @@
             // originalImageBox
             // 
             this.originalImageBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.originalImageBox.Location = new System.Drawing.Point(12, 42);
+            this.originalImageBox.Location = new System.Drawing.Point(8, 27);
+            this.originalImageBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.originalImageBox.Name = "originalImageBox";
-            this.originalImageBox.Size = new System.Drawing.Size(300, 300);
+            this.originalImageBox.Size = new System.Drawing.Size(201, 196);
             this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.originalImageBox.TabIndex = 0;
             this.originalImageBox.TabStop = false;
@@ -54,18 +55,20 @@
             // editedImageBox
             // 
             this.editedImageBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.editedImageBox.Location = new System.Drawing.Point(488, 42);
+            this.editedImageBox.Location = new System.Drawing.Point(325, 27);
+            this.editedImageBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.editedImageBox.Name = "editedImageBox";
-            this.editedImageBox.Size = new System.Drawing.Size(300, 300);
+            this.editedImageBox.Size = new System.Drawing.Size(201, 196);
             this.editedImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.editedImageBox.TabIndex = 1;
             this.editedImageBox.TabStop = false;
             // 
             // browseButton
             // 
-            this.browseButton.Location = new System.Drawing.Point(108, 348);
+            this.browseButton.Location = new System.Drawing.Point(72, 226);
+            this.browseButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(94, 32);
+            this.browseButton.Size = new System.Drawing.Size(63, 21);
             this.browseButton.TabIndex = 2;
             this.browseButton.Text = "Browse";
             this.browseButton.UseVisualStyleBackColor = true;
@@ -73,9 +76,10 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(596, 348);
+            this.saveButton.Location = new System.Drawing.Point(397, 226);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(94, 32);
+            this.saveButton.Size = new System.Drawing.Size(63, 21);
             this.saveButton.TabIndex = 3;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -83,9 +87,10 @@
             // 
             // negativeButton
             // 
-            this.negativeButton.Location = new System.Drawing.Point(348, 98);
+            this.negativeButton.Location = new System.Drawing.Point(232, 64);
+            this.negativeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.negativeButton.Name = "negativeButton";
-            this.negativeButton.Size = new System.Drawing.Size(112, 51);
+            this.negativeButton.Size = new System.Drawing.Size(75, 33);
             this.negativeButton.TabIndex = 4;
             this.negativeButton.Text = "Negative";
             this.negativeButton.UseVisualStyleBackColor = true;
@@ -93,9 +98,10 @@
             // 
             // greyscaleButton
             // 
-            this.greyscaleButton.Location = new System.Drawing.Point(348, 172);
+            this.greyscaleButton.Location = new System.Drawing.Point(232, 112);
+            this.greyscaleButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.greyscaleButton.Name = "greyscaleButton";
-            this.greyscaleButton.Size = new System.Drawing.Size(112, 51);
+            this.greyscaleButton.Size = new System.Drawing.Size(75, 33);
             this.greyscaleButton.TabIndex = 5;
             this.greyscaleButton.Text = "Greyscale";
             this.greyscaleButton.UseVisualStyleBackColor = true;
@@ -104,38 +110,37 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(108, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(72, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 20);
+            this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Original Image";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(588, 12);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(392, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 20);
+            this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Edited Image";
             // 
             // blurButton
             // 
-            this.blurButton.Location = new System.Drawing.Point(348, 246);
+            this.blurButton.Location = new System.Drawing.Point(232, 160);
+            this.blurButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.blurButton.Name = "blurButton";
-            this.blurButton.Size = new System.Drawing.Size(112, 51);
+            this.blurButton.Size = new System.Drawing.Size(75, 33);
             this.blurButton.TabIndex = 8;
-            this.blurButton.Text = "BoxBlur";
+            this.blurButton.Text = "Blur";
             this.blurButton.UseVisualStyleBackColor = true;
             this.blurButton.Click += new System.EventHandler(this.BlurButton_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 449);
+            this.ClientSize = new System.Drawing.Size(533, 292);
             this.Controls.Add(this.blurButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -146,6 +151,7 @@
             this.Controls.Add(this.editedImageBox);
             this.Controls.Add(this.originalImageBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "ImageEditor";
