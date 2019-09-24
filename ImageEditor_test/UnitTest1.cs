@@ -73,5 +73,12 @@ namespace Tests
                 }
             }
         }
+
+        [Test]
+        public void TestThatImage_IsBlurred()
+        {
+            Bitmap originalImage = new Bitmap(9, 9);
+
+        }
     }
 }
