@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         private OpenFileDialog openFileDialog = new OpenFileDialog();
-        private SaveFileDialog SaveFileDialog = new SaveFileDialog();
+        private SaveFileDialog saveFileDialog = new SaveFileDialog();
         private ImageEdit image;
         private FilePathSplitter filePath;
 
@@ -65,19 +65,19 @@ namespace WindowsFormsApp1
             editedImageBox.Image = image.CreateBlurredImage();
 
             saveButton.Enabled = true;
-        }
+        }                                            
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             filePath = new FilePathSplitter(openFileDialog.FileName);
 
-            SaveFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
-            SaveFileDialog.InitialDirectory = filePath.GetFileDirectory();
-            SaveFileDialog.FileName = filePath.GetFileNameWithSufix(editedImageBox.Image.Tag.ToString());
+            saveFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
+            saveFileDialog.InitialDirectory = filePath.GetFileDirectory();
+            saveFileDialog.FileName = filePath.GetFileNameWithSuffix(editedImageBox.Image.Tag.ToString());
 
-            if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                image.SaveImage((Bitmap)editedImageBox.Image, SaveFileDialog.FileName);
+                image.SaveImage((Bitmap)editedImageBox.Image, saveFileDialog.FileName);
             }
             
 
