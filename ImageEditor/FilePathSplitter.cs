@@ -31,9 +31,9 @@ namespace ImageEditor
             return Path.GetExtension(fileName);
         }
 
-        public string GetFileNameWithSufix(string sufix)
+        public string GetFileNameWithSuffix(string suffix)
         {
-            return GetFileNameWithoutExtension() + $"_{sufix}" + GetFileExtension();
+            return GetFileNameWithoutExtension() + $"_{suffix}" + GetFileExtension();
         }
 
     }

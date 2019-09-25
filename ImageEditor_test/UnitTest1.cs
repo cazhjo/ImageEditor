@@ -19,25 +19,24 @@ namespace Tests
             Bitmap originalImage = new Bitmap(3, 3);
             ImageEdit image = new ImageEdit(originalImage);
 
-            for(int x = 0; x < originalImage.Height; x++)
+            for (int x = 0; x < originalImage.Height; x++)
             {
-                for(int y = 0; y < originalImage.Width; y++)
+                for (int y = 0; y < originalImage.Width; y++)
                 {
                     originalImage.SetPixel(x, y, Color.FromArgb(150, 200, 250));
                 }
             }
 
-            
+
             Bitmap negativeImage = image.CreateNegativeImage();
             for (int x = 0; x < negativeImage.Height; x++)
             {
-                for(int y = 0; y < negativeImage.Width; y++)
+                for (int y = 0; y < negativeImage.Width; y++)
                 {
-                    Color originalPixelColor = originalImage.GetPixel(x, y);
                     Color negativePixelColor = negativeImage.GetPixel(x, y);
-                    Assert.AreEqual(255 - originalPixelColor.R, negativePixelColor.R);
-                    Assert.AreEqual(255 - originalPixelColor.G, negativePixelColor.G);
-                    Assert.AreEqual(255 - originalPixelColor.B, negativePixelColor.B);
+                    Assert.AreEqual(105, negativePixelColor.R);
+                    Assert.AreEqual(55, negativePixelColor.G);
+                    Assert.AreEqual(5, negativePixelColor.B);
                 }
             }
         }
@@ -53,6 +52,7 @@ namespace Tests
                 for (int y = 0; y < originalImage.Width; y++)
                 {
                     originalImage.SetPixel(x, y, Color.FromArgb(150, 200, 250));
+
                 }
             }
 
@@ -62,14 +62,11 @@ namespace Tests
             {
                 for (int y = 0; y < greyscaleImage.Width; y++)
                 {
-                    Color originalPixel = originalImage.GetPixel(x, y);
                     Color greyscalePixel = greyscaleImage.GetPixel(x, y);
 
-                    int rgbAverage = (originalPixel.R + originalPixel.G + originalPixel.B) / 3;
-
-                    Assert.AreEqual(rgbAverage, greyscalePixel.R);
-                    Assert.AreEqual(rgbAverage, greyscalePixel.G);
-                    Assert.AreEqual(rgbAverage, greyscalePixel.B);
+                    Assert.AreEqual(200, greyscalePixel.R);
+                    Assert.AreEqual(200, greyscalePixel.G);
+                    Assert.AreEqual(200, greyscalePixel.B);
                 }
             }
         }
@@ -80,15 +77,15 @@ namespace Tests
             Bitmap originalImage = new Bitmap(9, 9);
             ImageEdit imageEdit = new ImageEdit(originalImage);
 
-            for(int x = 0; x < originalImage.Height; x++)
+            for (int x = 0; x < originalImage.Height; x++)
             {
-                for(int y = 0; y < originalImage.Width; y++)
+                for (int y = 0; y < originalImage.Width; y++)
                 {
-                    originalImage.SetPixel(x, y, Color.AntiqueWhite);
+                    originalImage.SetPixel(x, y, Color.FromArgb(250, 250, 250));
                 }
             }
 
-            originalImage.SetPixel(4, 4, Color.AliceBlue);
+            originalImage.SetPixel(4, 4, Color.FromArgb(100, 100, 100));
 
             Bitmap blurredImage = imageEdit.CreateBlurredImage();
 
@@ -96,28 +93,8 @@ namespace Tests
             {
                 for (int y = 0; y < blurredImage.Width; y++)
                 {
-                    Color pixelColor;
-                    int redSum = 0;
-                    int greenSum = 0;
-                    int blueSum = 0;
-
-                    if (x > 1 && x < originalImage.Height - 2 && y > 1 && y < originalImage.Width - 2)
-                    {
-                        for (int d = -2; d < 3; d++)
-                        {
-                            for (int e = -2; e < 3; e++)
-                            {
-                                pixelColor = originalImage.GetPixel(x + d, y + e);
-                                redSum += pixelColor.R;
-                                greenSum += pixelColor.G;
-                                blueSum += pixelColor.B;
-                            }
-                        }
-
-                        Color expectedColor = Color.FromArgb(redSum / 25, greenSum / 25, blueSum / 25);
-                        Assert.AreEqual(expectedColor, blurredImage.GetPixel(x, y));
-                    }
-
+                    
+                    
                 }
             }
 
@@ -125,13 +102,13 @@ namespace Tests
         }
 
         [Test]
-        public void TestThatFilePath_HasSufix()
+        public void TestThatFileName_HasSuffix()
         {
             string originalFilePath = @"C:\Picture\apple.jpg";
             FilePathSplitter filePath = new FilePathSplitter(originalFilePath);
-            string newFilePath = filePath.GetFileDirectory() + filePath.DirectorySeparatorChar + filePath.GetFileNameWithSufix("test");
+            string newFilePath = filePath.GetFileNameWithSuffix("test");
 
-            Assert.AreEqual(@"C:\Picture\apple_test.jpg", newFilePath);
+            Assert.AreEqual("apple_test.jpg", newFilePath);
         }
     }
 }

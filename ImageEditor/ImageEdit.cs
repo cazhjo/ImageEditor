@@ -95,7 +95,7 @@ namespace ImageEditor
 
         public void SaveImage(Bitmap img)
         {
-            img.Save(filePath.GetFileDirectory() + Path.DirectorySeparatorChar + filePath.GetFileNameWithSufix(img.Tag.ToString()));
+            img.Save(filePath.GetFileDirectory() + filePath.DirectorySeparatorChar + filePath.GetFileNameWithSuffix(img.Tag.ToString()));
         }
 
         public void SaveImage(Bitmap img, string fileName)
