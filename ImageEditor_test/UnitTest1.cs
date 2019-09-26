@@ -89,12 +89,14 @@ namespace Tests
 
             Bitmap blurredImage = imageEdit.CreateBlurredImage();
 
-            for (int x = 0; x < blurredImage.Height; x++)
+            for (int x = 2; x < blurredImage.Height - 2; x++)
             {
-                for (int y = 0; y < blurredImage.Width; y++)
+                for (int y = 2; y < blurredImage.Width - 2; y++)
                 {
-                    
-                    
+                    Color blurredPixel = blurredImage.GetPixel(x, y);
+                    Assert.AreEqual(244, blurredPixel.R);
+                    Assert.AreEqual(244, blurredPixel.G);
+                    Assert.AreEqual(244, blurredPixel.B);
                 }
             }
 
