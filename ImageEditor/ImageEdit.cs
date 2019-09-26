@@ -89,7 +89,6 @@ namespace ImageEditor
 
                 }
             }
-
             return blurredImage;
         }
 
