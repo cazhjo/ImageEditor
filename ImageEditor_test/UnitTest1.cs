@@ -95,7 +95,7 @@ namespace Tests
                 {
                     Color blurredPixel = blurredImage.GetPixel(x, y);
                     Assert.AreEqual(244, blurredPixel.R);
-                    Assert.AreEqual(244, blurredPixel.G);
+                    Assert.AreEqual(244, blurredPixel.G);s
                     Assert.AreEqual(244, blurredPixel.B);
                 }
             }
