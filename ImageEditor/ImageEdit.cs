@@ -23,7 +23,7 @@ namespace ImageEditor
         public Bitmap CreateNegativeImage()
         {
             Bitmap negativeImage = new Bitmap(Image.Width, Image.Height);
-            negativeImage.Tag = new string("negative".ToCharArray());
+            negativeImage.Tag = "negative";
 
             for (int x = 0; x < Image.Height; x++)
             {
@@ -41,7 +41,7 @@ namespace ImageEditor
         public Bitmap CreateGrayscaleImage()
         {
             Bitmap greyscaleImage = new Bitmap(Image.Width, Image.Height);
-            greyscaleImage.Tag = new string("greyscale".ToCharArray());
+            greyscaleImage.Tag = "greyscale";
 
             for (int x = 0; x < Image.Height; x++)
             {
@@ -57,21 +57,24 @@ namespace ImageEditor
             return greyscaleImage;
         }
 
+        /// <summary>
+        /// Blurs the image but leaves 4 pixels in width and height unblurred
+        /// </summary>
+        /// <returns>A blurred image from the original image</returns>
         public Bitmap CreateBlurredImage()
         {
             Bitmap blurredImage = new Bitmap(Image.Width, Image.Height);
-            blurredImage.Tag = new string("blurred".ToCharArray());
+            blurredImage.Tag = "blurred";
 
-            for (int x = 0; x < Image.Height; x++)
+            for (int x = 2; x < Image.Height - 2; x++)
             {
-                for (int y = 0; y < Image.Width; y++)
+                for (int y = 2; y < Image.Width - 2; y++)
                 {
                     Color pixelColor;
                     int redSum = 0;
                     int greenSum = 0;
                     int blueSum = 0;
 
-                    if (x > 1 && x < Image.Height - 2 && y > 1 && y < Image.Width - 2)
                     {
                         for (int d = -2; d < 3; d++)
                         {
@@ -94,7 +97,7 @@ namespace ImageEditor
 
         public void SaveImage(Bitmap img)
         {
-            img.Save(filePath.GetFileDirectory() + filePath.DirectorySeparatorChar + filePath.GetFileNameWithSuffix(img.Tag.ToString()));
+            img.Save(filePath.GetFullFilePathWithSuffix((string)img.Tag));
         }
 
         public void SaveImage(Bitmap img, string fileName)

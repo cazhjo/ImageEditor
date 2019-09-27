@@ -36,5 +36,10 @@ namespace ImageEditor
             return GetFileNameWithoutExtension() + $"_{suffix}" + GetFileExtension();
         }
 
+        public string GetFullFilePathWithSuffix(string suffix)
+        {
+            return GetFileDirectory() + DirectorySeparatorChar + GetFileNameWithSuffix(suffix);
+        }
+
     }
 }
