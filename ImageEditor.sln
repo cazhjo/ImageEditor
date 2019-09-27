@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageEditor", "ImageEditor\ImageEditor.csproj", "{D65FBBCD-5482-4C23-B2AA-D75B08B78FE0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{523A8DCC-A891-40E0-9DE8-A0C5A244A2EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageEditorApp", "ConsoleApp1\ImageEditorApp.csproj", "{523A8DCC-A891-40E0-9DE8-A0C5A244A2EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{021BE124-CD29-4A3F-B85D-7F2257B2C0EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageEditorForm", "WindowsFormsApp1\ImageEditorForm.csproj", "{021BE124-CD29-4A3F-B85D-7F2257B2C0EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageEditor_test", "ImageEditor_test\ImageEditor_test.csproj", "{9A0B519E-30E7-408D-962B-134B0524668C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageEditor_Tests", "ImageEditor_test\ImageEditor_Tests.csproj", "{9A0B519E-30E7-408D-962B-134B0524668C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

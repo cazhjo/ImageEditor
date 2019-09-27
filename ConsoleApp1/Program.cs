@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 
 
-namespace ConsoleApp1
+namespace ImageEditorApp
 {
     class Program
     {
@@ -12,9 +12,13 @@ namespace ConsoleApp1
         {
             string fileName = string.Empty;
 
-            if(args.Length != 0)
+            if(args.Length == 2)
             {
                 fileName = args[1];
+            }
+            else if(args.Length == 1)
+            {
+                fileName = args[0];
             }
             else
             {

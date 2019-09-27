@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace ImageEditorForm
 {
     partial class Form1
     {
