@@ -58,7 +58,7 @@ namespace ImageEditor
         }
 
         /// <summary>
-        /// Blurs the image but leaves 4 pixels in width and height unblurred
+        /// Blurs the image but leaves 4 pixels in width and height(2 on each side) unblurred
         /// </summary>
         /// <returns>A blurred image from the original image</returns>
         public Bitmap CreateBlurredImage()
