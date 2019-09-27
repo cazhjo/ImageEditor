@@ -34,6 +34,8 @@ namespace ImageEditorForm
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                editedImageBox.Image = null;
+
                 ImageEdit image = new ImageEdit(openFileDialog.FileName);
                 originalImageBox.Image = image.Image;
                 
@@ -73,7 +75,7 @@ namespace ImageEditorForm
 
             saveFileDialog.Filter = "jpeg (*.jpg)|*.jpg|png (*.png)|*.png) ";
             saveFileDialog.InitialDirectory = filePath.GetFileDirectory();
-            saveFileDialog.FileName = filePath.GetFileNameWithSuffix(editedImageBox.Image.Tag.ToString());
+            saveFileDialog.FileName = filePath.GetFileNameWithSuffix((string)editedImageBox.Image.Tag);
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
